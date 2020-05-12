@@ -28,7 +28,7 @@ class Header extends Component {
 
     this.state = {
       isNavOpen: false,
-      isMoalOpen: false,
+      isModalOpen: false,
     };
   }
 
@@ -40,7 +40,7 @@ class Header extends Component {
 
   toggleModal() {
     this.setState({
-      isMoalOpen: !this.state.isMoalOpen,
+      isModalOpen: !this.state.isModalOpen,
     });
   }
 
@@ -107,7 +107,7 @@ class Header extends Component {
             </Collapse>
           </div>
         </Navbar>
-        <Modal isOpen={this.state.isMoalOpen} toggle={this.toggleModal}>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleLogin}>

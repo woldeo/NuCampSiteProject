@@ -16,6 +16,7 @@ import Home from "./HomeComponent";
 import About from "./AboutComponent";
 import Contact from "./ContactComponent";
 import { actions } from "react-redux-form";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const mapDispatchToProps = {
   postComment: (campsiteId, rating, author, text) =>
@@ -89,27 +90,35 @@ class Main extends Component {
     return (
       <div>
         <Header />
-        <Switch>
-          <Route path="/home" component={HomePage} />
-          <Route
-            exact
-            path="/contactus"
-            render={() => (
-              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
-            )}
-          />
-          <Route path="/directory/:campsiteId" component={CampsiteWithId} />
-          <Route
-            exact
-            path="/directory"
-            render={() => <Directory campsites={this.props.campsites} />}
-          />
-          <Route
-            path="/aboutus"
-            render={() => <About partners={this.props.partners} />}
-          />
-          <Redirect to="/home" />
-        </Switch>
+        <TransitionGroup>
+          <CSSTransition
+            key={this.props.location.key}
+            classNames="page"
+            timeout={300}
+          >
+            <Switch>
+              <Route path="/home" component={HomePage} />
+              <Route
+                exact
+                path="/contactus"
+                render={() => (
+                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                )}
+              />
+              <Route path="/directory/:campsiteId" component={CampsiteWithId} />
+              <Route
+                exact
+                path="/directory"
+                render={() => <Directory campsites={this.props.campsites} />}
+              />
+              <Route
+                path="/aboutus"
+                render={() => <About partners={this.props.partners} />}
+              />
+              <Redirect to="/home" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer />
       </div>
     );

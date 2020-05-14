@@ -95,6 +95,7 @@ class Contact extends Component {
   handleSubmit(values) {
     console.log("Current state is: " + JSON.stringify(values));
     alert("Current state is " + JSON.stringify(values));
+    this.props.resetFeedbackForm();
   }
 
   render() {
@@ -152,7 +153,7 @@ class Contact extends Component {
             <hr />
           </div>
           <div className="col-md-10">
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+            <LocalForm model="feedbackForm" onSubmit={(values) => this.handleSubmit(values)}>
               <Row className="form-group">
                 <Label htmlFor="firstName" md={2}>
                   First Name
@@ -170,7 +171,7 @@ class Contact extends Component {
                       maxLength: maxLength(15),
                     }}
                   />
-                  <Errors
+                  <errors
                     className="text-danger"
                     model=".firstName"
                     show="touched"
